@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pagamento Pix</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;}
+    .card{max-width:420px;width:100%;text-align:center;border-radius:8px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,0.08);}
+    img{max-width:100%;height:auto;}
+    textarea{width:100%;height:80px;margin-top:10px;}
+    button{margin-top:8px;padding:10px 12px;border:none;border-radius:6px;cursor:pointer;}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Pix — Aproximar ou escanear</h2>
+
+    <!-- QR gerado automaticamente -->
+    <img id="qr" src="" alt="QR Pix" />
+
+    <p>Se preferir, copie o código abaixo e cole no seu app bancário:</p>
+    <textarea id="pixtext" readonly>00020126360014br.gov.bcb.pix0114+55349885868575204000053039865802BR5924GUSTAVO NOGUEIRA PACHECO6009Sao Paulo62290525REC68CBBA740744F88416658663041F92</textarea>
+    <br/>
+    <button onclick="copyPix()">Copiar código Pix</button>
+  </div>
+
+  <script>
+    const pix = `00020126360014br.gov.bcb.pix0114+55349885868575204000053039865802BR5924GUSTAVO NOGUEIRA PACHECO6009Sao Paulo62290525REC68CBBA740744F88416658663041F92`;
+    const qrImg = document.getElementById('qr');
+    qrImg.src = 'https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=' + encodeURIComponent(pix);
+    document.getElementById('pixtext').value = pix;
+    function copyPix(){
+      navigator.clipboard.writeText(pix).then(()=> alert('Copiado! Cole no app do seu banco.'), ()=> alert('Não foi possível copiar.'));
+    }
+  </script>
+</body>
+</html>
